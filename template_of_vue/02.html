@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="vue.js"></script>
+
+    <style>
+        .red{
+            background-color: red;
+        }
+        .yellow{
+            background-color: yellow;
+        }
+    </style>
+
+  </head>
+
+  <body>
+    <div id="box">
+
+        <div v-bind:class="color">
+            123123
+        </div>
+        <div v-bind:class="isLogin?'red':'yellow'">
+            123456
+        </div>
+
+        <img :src="url" :alt="alt" :width="width">
+        <img v-bind="image_name"/>
+
+        <br>
+        <button :disabled="isDisabled">Click me</button>
+    </div>
+
+    <script>
+      var obj = {
+        data(){
+            return{
+                isLogin: false,
+                color: 'red',
+                url:"https://www.chuhelan.com/wp-content/uploads/2020/12/Cyberpunk2077_Lucky_number_13_RGB-en_1605854311407.jpg",
+                width: 500,
+                alt:"CyberPunk 2077",
+                isDisabled:true,
+                image_name:{
+                  width:200,
+                  src:"https://www.chuhelan.com/wp-content/uploads/2020/12/Cyberpunk2077_Lucky_number_13_RGB-en_1605854311407.jpg",
+                }
+            }
+        }
+      };
+      Vue.createApp(obj).mount("#box");
+    </script>
+  </body>
+</html>
