@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+
+<div id="box">
+    <div style="background: red;">赵钱孙李</div>
+
+    <div :style="{backgroundColor:'red'}">赵钱孙李</div>
+    <div :style="{'background-color':color}">赵钱孙李</div>
+    <div :style="styleObj">赵钱孙李</div>
+
+    <div :style="imgObj"></div>
+    <button @click="handleAjax()">click me</button>
+</div>
+
+<script>
+
+    var obj = {
+        data() {
+            return {
+                color: 'yellow',
+                styleObj: {
+                    background: 'red',
+                    fontSize: '20px'
+                },
+                imgObj: {
+                    width: '200px',
+                    height: '200px',
+                    backgroundSize: 'cover',
+                },
+            }
+        },
+        methods: {
+            handleAjax() {
+                this.imgObj.backgroundImage="url(https://avatars.githubusercontent.com/u/64128597?v=4)";
+            }
+        }
+    }
+    var app = Vue.createApp(obj).mount("#box")
+</script>
+
+</body>
+</html>
