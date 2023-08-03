@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+
+<div id="box">
+    <ul>
+        <li v-for="({code,message},index) of datalist">
+            {{code}} ---- {{index}}
+            <div v-if="code===200">
+                <b>success</b>
+            </div>
+            <div v-else-if="code===302">
+                <b>time out</b>
+            </div>
+            <div v-else>
+                <b>not found</b>
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+<script>
+
+    // let {code,message} = {
+    //     code: 200,
+    //     message: 'success'
+    // }
+
+    /*
+    * 1.小括号
+    * 2.支持解构
+    * 3.in === of(js迭代器)
+    * */
+
+    let obj = {
+        data() {
+            return {
+                datalist: [
+                    {
+                        code: 200,
+                        message: 'success'
+                    },
+                    {
+                        code: 302,
+                        message: 'time out'
+                    },
+                    {
+                        code: 404,
+                        message: 'not found'
+                    }
+                ]
+            }
+        }
+    }
+
+    let app = Vue.createApp(obj).mount('#box')
+</script>
+
+</body>
+</html>

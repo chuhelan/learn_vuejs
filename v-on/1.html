@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+
+    <div id="box">
+
+        <ul @click.self="handleUlClick()">
+            <!-- stop stopPropagation -->
+            <li @click.stop="handleClick1()">1112</li>
+            <li @click="isOnce && handleClick2()">222</li>
+        </ul>
+
+        <form action="" @submit.prevent="handleSubmit()">
+            <button type="submit">登录</button>
+        </form>
+
+        <button @click.once="handleStar">抽奖</button>
+    </div>
+
+    <script>
+
+        let obj = {
+            data() {
+                return {
+                    isOnce:true,
+                }
+            },
+            methods: {
+                handleClick1() {
+                    console.log(111);
+                },
+                handleUlClick() {
+                    console.log('ul-click')
+                },
+                handleSubmit(){
+                    console.log('submit',"校验");
+                },
+                handleClick2(){
+                    console.log('222');
+                    this.isOnce = false;
+                },
+                handleStar(){
+                    console.log("抽奖");
+                }
+            }
+        }
+
+        let app = Vue.createApp(obj).mount('#box')
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+
+
+    <div id="box">
+
+        <!-- <input type="text" @input="handleInput"> -->
+
+        <!-- v-model 双向绑定的指令 -->
+        <input type="text" v-model="mytext" @keyup.enter.ctrl="handleKeyup">
+
+        <input type="text" @keyup.a="handleTest">
+
+        <button @click="handleAdd">add</button>
+
+        <ul>
+            <li v-for="item,index in datalist">
+                {{item}}
+                <button @click="handelDel(index)">delete</button>
+            </li>
+        </ul>
+
+        <div v-if="datalist.length === 0">div暂无代办事项</div>
+
+    </div>
+
+
+    <script>
+        var obj = {
+            data() {
+                return {
+                    mytext: "",
+                    datalist: ["11", "22", "33"],
+                }
+            },
+            methods: {
+                handleAdd() {
+                    console.log('add', this.mytext);
+                    this.datalist.push(this.mytext)
+                    this.mytext = ''
+                },
+                handleInput(event) {
+                    // console.log('input', event.target.value);
+                    this.mytext = event.target.value
+                },
+                handelDel(index) {
+                    this.datalist.splice(index, 1)
+                },
+                handleKeyup(evt) {
+                    if (evt.keyCode == 13) {
+                        this.handleAdd()
+                    }
+                },
+                handleTest(){
+                    console.log('123');
+                }     
+            }
+        }
+        var app = Vue.createApp(obj).mount('#box')
+    </script>
+
+</body>
+
+</html>

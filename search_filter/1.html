@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+
+    <div id="box">
+        <input type="text" v-model="mytext" placeholder="input value here">
+        <ul>
+            <template v-for="item in datalist" :key="item" >
+                <div v-if="item.includes(mytext)">
+                    {{item}}
+                </div>
+            </template>
+        </ul>
+    </div>
+
+    <script>
+        let obj = {
+            data() {
+                return {
+                    mytext:"",
+                    datalist:
+                        [   'aaa',
+                            'bbb',
+                            'ccc',
+                            'ddd',
+                            'eee',
+                            'asdv',
+                            'zcxv',
+                            'wrg',
+                            'jbn',
+                            'piyu',
+                            'vpoa',
+                            'dery']
+                }
+            }
+        }
+        let app = Vue.createApp(obj).mount('#box')
+    </script>
+
+</body>
+
+</html>

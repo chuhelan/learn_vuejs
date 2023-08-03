@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="box">
+<!--    选项  current 0-->
+    <ul>
+        <template v-for="({title,state},index) of datalist">
+            <li  v-if="state===current">
+                {{title}}---{{index}}
+            </li>
+        </template>
+    </ul>
+
+</div>
+
+
+<script>
+
+    let obj = {
+        data() {
+            return {
+                current:0,
+                datalist:[
+                    {
+                        title:"手机",
+                        state:0
+                    },
+                    {
+                        title:"电脑",
+                        state:1
+                    },
+                    {
+                        title:"手表",
+                        state:2
+                    },
+                    {
+                        title:"衣服",
+                        state:3
+                    },
+                    {
+                        title:"鞋子",
+                        state:4
+                    },
+                ]
+            }
+        }
+    }
+
+    let app = Vue.createApp(obj).mount('#box')
+</script>
+
+</body>
+</html>

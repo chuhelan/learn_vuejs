@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    
+<div id="box">
+{{count}}
+<!-- 表达式 -->
+<br><button @click="count++">add</button>
+<button @click="count--">delete</button>
+<button @click="handleAdd2()">add2</button>
+<!-- 方法时间处理器 -->
+<button @click="handleAdd3">add3</button>
+<button @click="this.count=0">delete all</button>
+
+<ul @click="handleUlClick()">
+    <li @click="handleClick(1,2,3,$event)">111</li>
+    <li @click="(evt)=>handleClick2(1,2,3,evt)">222</li>
+</ul>
+</div>
+
+<script>
+
+    let obj = {
+        data(){
+            return{
+                count:0
+            }
+        },
+        methods:{
+            handleAdd2(){
+                this.count += 2
+            },
+            handleAdd3(){
+                this.count +=3
+            },
+            handleClick(a,b,c,d){
+                console.log(a,b,c,d.target)
+            },
+            handleClick2(a,b,c,evt){
+                console.log("2222",a,b,c)
+                console.log(evt.target);
+                evt.stopPropagation()
+            },
+            handleUlClick(){
+                console.log('ul-click')
+            }
+        }
+    }
+
+    let app = Vue.createApp(obj).mount('#box')
+</script>
+
+</body>
+</html>

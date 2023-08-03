@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+
+    <div id="box">
+
+        <ul>
+            <li v-for="({code,message,id},index) of datalist" :key="id">
+                {{code}}---{{index}}---{{id}}
+                <div v-if="code===200">
+                    <b>success</b>
+                </div>
+                <div v-else-if="code===302">
+                    <b>time out</b>
+                </div>
+                <div v-else>
+                    <b>not found</b>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+
+
+    <script>
+
+        let obj = {
+            data() {
+                return {
+                    datalist: [
+                        {
+                            code: 200,
+                            message: 'success',
+                            id:1
+                        },
+                        {
+                            code: 302,
+                            message: 'time out',
+                            id:2
+                        },
+                        {
+                            code: 404,
+                            message: 'not found',
+                            id:3
+                        }
+                    ]
+                }
+            }
+        }
+        let app = Vue.createApp(obj).mount('#box')
+
+    </script>
+</body>
+
+</html>
