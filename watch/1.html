@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+
+    <div id="box">
+        <input type="text" v-model="mytext">
+        <ul>
+            <li v-for="item in datalist" :key="item">
+                {{item}}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+
+        let obj = {
+            data() {
+                return {
+                    mytext: '',
+                    datalist: [
+                        'aaa', 'bbb', 'ccc', 'sad', 'etfd', 'pjo', 'bnfdkj', 'nfe', 'qtp', 'hyu'
+                    ],
+                    baklist: [
+                        'aaa', 'bbb', 'ccc', 'sad', 'etfd', 'pjo', 'bnfdkj', 'nfe', 'qtp', 'hyu'
+                    ]
+                }
+            },
+            watch:{
+                mytext(value,oldvalue){
+                    console.log(value, oldvalue);
+                    setTimeout(() => {
+                        this.datalist = this.baklist.filter(item => item.includes(this.mytext))
+                    },1000)
+                }
+            }
+        }
+
+        let app = Vue.createApp(obj).mount('#box')
+    </script>
+</body>
+
+</html>

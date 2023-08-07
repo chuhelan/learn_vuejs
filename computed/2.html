@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+
+    <div id="box">
+
+        <div>
+            计算属性-{{myComputedName}}
+        </div>
+
+        <div>
+            {{computedDate}}
+        </div>
+    </div>
+
+    <script>
+        let obj = {
+            data() {
+                return {
+                    'myname': 'chuhelan',
+                    'year': 2023,
+                    'month': 5,
+                    'day': 8
+                }
+            },
+            // 计算属性
+            // 计算的结果会缓存
+            computed: {
+                myComputedName() {
+                    //基于依赖修改之后，重新计算一遍
+                    console.log("计算属性");
+                    return this.myname.substring(0, 1).toUpperCase() + this.myname.substring(1)
+                },
+                computedDate: {
+                    get() {
+                        return this.year + '-' + this.month + '-' + this.day
+                    },
+                    set(value) {
+                        // this.year = value.split('-')[0]
+                        // this.month = value.split('-')[1]
+                        // this.day = value.split('-')[2]
+
+                        [this.year,this.month,this.day] = value.split("-")
+                    }
+                }
+            }
+        }
+
+        let app = Vue.createApp(obj).mount('#box')
+    </script>
+</body>
+
+</html>

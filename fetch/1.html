@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <button @click="handleClick">click</button>
+        <ul>
+            <li v-for="item in datalist">
+                {{item}}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        let obj = {
+            data() {
+                return {
+                    datalist:[]
+                }
+            },
+            methods: {
+                handleClick() {
+                    //基于promise 
+                    fetch("./test.json")
+                        .then(res => res.json())
+                        .then(res => {
+                            this.datalist = res.list
+                        })
+                }
+            }
+        }
+        let app = Vue.createApp(obj).mount('#box')
+    </script>
+</body>
+</html>

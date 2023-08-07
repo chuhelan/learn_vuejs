@@ -25,14 +25,14 @@
     <div id="box">
         <ul>
             <li>
-                <div> <input type="checkbox" v-model="isAllChecked" @change="handleAllChange">
+                <div> <input type="checkbox" v-model="isAllChecked">
                     <span>全选/全不选</span>
                 </div>
             </li>
             <template v-if="datalist.length">
                 <li v-for="(item,index) in datalist" :key="item.id">
                     <div>
-                        <input type="checkbox" v-model="checklist" :value="item" @change="handleItemChange">
+                        <input type="checkbox" v-model="checklist" :value="item">
                     </div>
                     <div>
                         <img :src="item.poster">
@@ -64,7 +64,6 @@
         let obj = {
             data() {
                 return {
-                    isAllChecked: false,
                     checklist: [],
                     datalist: [
                         {
@@ -103,38 +102,25 @@
                 }
             },
             methods: {
-                // sum() {
-                //     // var total = 0;
-                //     // for(var i=0;i<this.checklist.length;i++){
-                //     //     total+=this.checklist[i].number*this.checklist[i].price
-                //     // }
-                //     // return total
 
-                //     return this.checklist.reduce((total, item) => total + item.price * item.number, 0)
-                // },
                 handleDel(index, id) {
                     this.datalist.splice(index, 1)
                     // update checklist
                     this.checklist = this.checklist.filter(item => item.id !== id)
-                    // update AllChecked
-                    this.handleItemChange()
                 },
-                handleAllChange() {
-                    // console.log(this.isAllChecked);
-                    this.checklist = this.isAllChecked ? this.datalist : []
-                },
-                handleItemChange() {
-                    // console.log(this.checklist.length,this.datalist.length);
-                    if (this.datalist.length === 0) {
-                        this.isAllChecked = false
-                        return
-                    }
-                    this.isAllChecked = this.checklist.length === this.datalist.length
-                }
             },
             computed: {
                 sum() {
                     return this.checklist.reduce((total, item) => total + item.price * item.number, 0)
+                },
+                isAllChecked:{
+                    get(){
+                        return this.checklist.length === this.datalist.length
+                    },
+                    set(checked){
+                        // console.log(value);
+                        this.checklist = checked ? this.datalist : []
+                    }
                 }
             },
 

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+
+    <div id="box">
+        <input type="text" v-model="mytext">
+        <select v-model="obj.year">
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+        </select>
+        <select v-model="obj.month">
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+        </select>
+        <select v-model="obj.day">
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+        </select>
+    </div>
+
+    <script>
+
+        let obj = {
+            data() {
+                return {
+                    mytext: '',
+                    obj:{
+                        year:2023,
+                        month:8,
+                        day:5
+                    }
+                }
+            },
+            watch:{
+                mytext:"anyfunc",
+                // "obj.year":"anyfunc",
+                // "obj.month":"anyfunc",
+                // "obj.day":"anyfunc",
+                obj:{
+                    handler(value){
+                        console.log(value);
+                    },
+                    deep:true,//复杂对象进行升读监听
+                    immediate:true
+                }
+            },
+            methods:{
+                anyfunc(value,oldvalue){
+                    console.log(value,oldvalue);
+                }
+            }
+        }
+
+        let app = Vue.createApp(obj).mount('#box')
+    </script>
+</body>
+
+</html>

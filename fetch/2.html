@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <button @click="handleClick">click</button>
+        <ul>
+            <li v-for="item in datalist">
+                {{item.name}}--{{item.age}}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        let obj = {
+            data() {
+                return {
+                    datalist:[]
+                }
+            },
+            methods: {
+                handleClick() {
+                    //基于promise 
+                    // fetch("http://localhost:3000/list")
+                    //     .then(res => res.json())
+                    //     .then(res => {
+                    //         this.datalist = res
+                    //     })
+
+                    // fetch("http://localhost:3000/list",{
+                    //     method:"post",
+                    //     headers:{
+                    //         "content-type":"application/x-www-form-urlencoded",
+
+                    //     },
+                    //     body:"name=wmp&age=19"
+                    // }).then(res=>res.json())
+                    // .then(res=>{
+                    //     console.log(res);
+                    // })
+
+                    
+                    fetch("http://localhost:3000/list/3",{
+                        method:"put",
+                        headers:{
+                            "content-type":"application/json",
+
+                        },
+                        body:JSON.stringify({
+                            name:"winelee",
+                            age:25
+                        })
+                    }).then(res=>res.json())
+                    .then(res=>{
+                        console.log(res);
+                    })
+                }
+            }
+        }
+        let app = Vue.createApp(obj).mount('#box')
+    </script>
+</body>
+</html>
