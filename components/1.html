@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <chuhelan-navbar></chuhelan-navbar>
+        <chuhelan-siderbar></chuhelan-siderbar>
+        <chuhelan-global-button></chuhelan-global-button>
+    </div>
+
+    <script>
+        // 扩展html元素，封装可重用的代码
+        let obj = {
+            data() {
+                return {
+
+                }
+            }
+        }
+
+        let app = Vue.createApp(obj)
+
+        //定义全局组件
+        app.component("chuhelan-navbar", {
+            //模板
+            template:
+            `
+                <nav style="background:yellow;">
+                    <ul>
+                        <li v-for="item in datalist">{{item}}</li>
+                    </ul>
+                    <chuhelan-global-button></chuhelan-global-button>
+                </nav>
+            `,
+            data() {
+                return {
+                    datalist: ["首页", "新闻", "产品"]
+                }
+            }
+        })
+
+        app.component("chuhelan-siderbar", {
+            template: 
+            `
+                <aside>
+                    我是侧边栏
+                    <chuhelan-button></chuhelan-button>
+                </aside>
+
+            `,
+            //局部组件定义
+            components:{
+                "chuhelan-button":{
+                    template:
+                    `
+                        <div>
+                            <button style="background:red;">联系</button>
+                        </div>  
+
+                    `
+                }
+            }
+        })
+
+        app.component("chuhelan-global-button",{
+            template:
+                    `
+                        <div>
+                            <button style="background:blue;">全局</button>
+                        </div>  
+
+                    `
+        })
+
+        app.mount("#box")
+    </script>
+</body>
+
+</html>
