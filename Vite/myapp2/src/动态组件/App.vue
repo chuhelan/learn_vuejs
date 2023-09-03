@@ -11,10 +11,15 @@
         </keep-alive> -->
 
 
-        <KeepAlive include="Home">
+        <!-- <KeepAlive include="home,list,center"> -->
+        <!-- <KeepAlive :include="/home|list/">
+            <component :is="which" />
+        </KeepAlive> -->
+
+
+        <KeepAlive :exclude="/list/">
             <component :is="which" />
         </KeepAlive>
-
 
         <Tabbar />
     </div>

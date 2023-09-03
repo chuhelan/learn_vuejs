@@ -1,4 +1,12 @@
 <template>
-    <div>list</div>
-    <input type="text">
+    <div>
+        list
+        <input type="text">
+    </div>
 </template>
+
+<script>
+export default {
+    name: "list"
+}
+</script>
